@@ -1,0 +1,482 @@
+[
+  {
+    "task_id": "corpfin_m001",
+    "type": "npv_from_refs",
+    "description": "Using the *cashflows* from corpfin_003 and the *WACC* computed in corpfin_010 as the discount rate, compute the NPV.",
+    "inputs": {
+      "cashflows_from": "corpfin_003",
+      "discount_from": "corpfin_010",
+      "discount_field": "wacc"
+    },
+    "answer_keys": [
+      "npv"
+    ],
+    "expected": {
+      "npv": 1361.6886227762025
+    },
+    "tolerance": {
+      "npv": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m002",
+    "type": "recall_and_transform",
+    "description": "Recall the IRR from corpfin_001 and return it in percent (e.g., 11.4895 for 0.114895).",
+    "inputs": {
+      "task_ref": "corpfin_001",
+      "field": "irr",
+      "scale": 100.0
+    },
+    "answer_keys": [
+      "irr_percent"
+    ],
+    "expected": {
+      "irr_percent": 11.489473550664986
+    },
+    "tolerance": {
+      "irr_percent": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_m003",
+    "type": "dcf_sensitivity",
+    "description": "Using the *same inputs as corpfin_019* but with terminal growth g_terminal = 0.03, recompute enterprise value and price per share.",
+    "inputs": {
+      "base_task": "corpfin_019",
+      "override": {
+        "g_terminal": 0.03
+      }
+    },
+    "answer_keys": [
+      "enterprise_value",
+      "price_per_share"
+    ],
+    "expected": {
+      "enterprise_value": 1916.6666666666665,
+      "price_per_share": 188.66666666666666
+    },
+    "tolerance": {
+      "enterprise_value": 0.01,
+      "price_per_share": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_m004",
+    "type": "lease_tax_swap",
+    "description": "Recompute corpfin_027 (lease vs buy) but replace the tax rate with the corporate tax used in corpfin_013. Return npv_buy, npv_lease, preferred.",
+    "inputs": {
+      "base_task": "corpfin_027",
+      "tax_from": "corpfin_013"
+    },
+    "answer_keys": [
+      "npv_buy",
+      "npv_lease",
+      "preferred"
+    ],
+    "expected": {
+      "npv_buy": -191946.72284098016,
+      "npv_lease": -189254.45575750124,
+      "preferred": "lease"
+    },
+    "tolerance": {
+      "npv_buy": 0.01,
+      "npv_lease": 0.01,
+      "preferred": 0
+    }
+  },
+  {
+    "task_id": "corpfin_m005",
+    "type": "beta_chain",
+    "description": "Take the unlevered beta from corpfin_016, and relever it using the new D/E from corpfin_015 and the tax rate from corpfin_017.",
+    "inputs": {
+      "beta_u_from": "corpfin_016",
+      "d_to_e_from": "corpfin_015",
+      "tax_from": "corpfin_017"
+    },
+    "answer_keys": [
+      "beta_l_new"
+    ],
+    "expected": {
+      "beta_l_new": 1.7534693877551017
+    },
+    "tolerance": {
+      "beta_l_new": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_m006",
+    "type": "capm_with_relevered_beta",
+    "description": "Compute cost of equity via CAPM using rf and market_premium from corpfin_012, and beta equal to the beta_l_new you computed in corpfin_m005.",
+    "inputs": {
+      "rf_from": "corpfin_012",
+      "market_premium_from": "corpfin_012",
+      "beta_from": "corpfin_m005"
+    },
+    "answer_keys": [
+      "ke"
+    ],
+    "expected": {
+      "ke": 0.1352081632653061
+    },
+    "tolerance": {
+      "ke": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_m007",
+    "type": "wacc_mix_sources",
+    "description": "Compute WACC using ke from corpfin_m006, kd from corpfin_010, and (tax, w_d, w_e) from corpfin_014.",
+    "inputs": {
+      "ke_from": "corpfin_m006",
+      "kd_from": "corpfin_010",
+      "weights_from": "corpfin_014"
+    },
+    "answer_keys": [
+      "wacc"
+    ],
+    "expected": {
+      "wacc": 0.09376489795918366
+    },
+    "tolerance": {
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_m008",
+    "type": "npv_from_refs",
+    "description": "Compute NPV using cashflows from corpfin_006 but discount rate = WACC from corpfin_m007.",
+    "inputs": {
+      "cashflows_from": "corpfin_006",
+      "discount_from": "corpfin_m007",
+      "discount_field": "wacc"
+    },
+    "answer_keys": [
+      "npv"
+    ],
+    "expected": {
+      "npv": 1188.4775402899936
+    },
+    "tolerance": {
+      "npv": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m009",
+    "type": "discounted_payback",
+    "description": "Compute the discounted payback period (years, can be fractional via linear interpolation within the year) for the project in corpfin_002 using its own discount rate.",
+    "inputs": {
+      "cashflows_from": "corpfin_002",
+      "discount_rate_from": "corpfin_002"
+    },
+    "answer_keys": [
+      "discounted_payback_years"
+    ],
+    "expected": {
+      "discounted_payback_years": Infinity
+    },
+    "tolerance": {
+      "discounted_payback_years": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m010",
+    "type": "mirr",
+    "description": "Compute MIRR for corpfin_001 cashflows using finance_rate = rf from corpfin_009 and reinvest_rate = ke from corpfin_009.",
+    "inputs": {
+      "cashflows_from": "corpfin_001",
+      "finance_rate_from": "corpfin_009",
+      "reinvest_rate_from": "corpfin_009"
+    },
+    "answer_keys": [
+      "mirr"
+    ],
+    "expected": {
+      "mirr": 0.10754291621789669
+    },
+    "tolerance": {
+      "mirr": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m011",
+    "type": "npv_compare_by_ref",
+    "description": "Using discount rate equal to the WACC from corpfin_011, compute NPVs for projects corpfin_001 and corpfin_002 (use their original cashflows) and return which has higher NPV.",
+    "inputs": {
+      "discount_from": "corpfin_011",
+      "projects": [
+        "corpfin_001",
+        "corpfin_002"
+      ]
+    },
+    "answer_keys": [
+      "npv_1",
+      "npv_2",
+      "preferred"
+    ],
+    "expected": {
+      "npv_1": 207.73999867250126,
+      "npv_2": 29.17652036310608,
+      "preferred": "corpfin_001"
+    },
+    "tolerance": {
+      "npv_1": 0.01,
+      "npv_2": 0.01,
+      "preferred": 0
+    }
+  },
+  {
+    "task_id": "corpfin_m012",
+    "type": "dcf_with_new_wacc",
+    "description": "Recompute corpfin_020 DCF but replace wacc with the WACC from corpfin_m007.",
+    "inputs": {
+      "base_task": "corpfin_020",
+      "wacc_from": "corpfin_m007"
+    },
+    "answer_keys": [
+      "enterprise_value",
+      "price_per_share"
+    ],
+    "expected": {
+      "enterprise_value": 3170.8845497571083,
+      "price_per_share": 312.0884549757108
+    },
+    "tolerance": {
+      "enterprise_value": 0.01,
+      "price_per_share": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_m013",
+    "type": "break_even_mix",
+    "description": "Compute break-even units using fixed_cost from corpfin_023, and price & variable_cost from corpfin_024.",
+    "inputs": {
+      "fixed_cost_from": "corpfin_023",
+      "price_from": "corpfin_024",
+      "variable_cost_from": "corpfin_024"
+    },
+    "answer_keys": [
+      "break_even_units"
+    ],
+    "expected": {
+      "break_even_units": 6250.0
+    },
+    "tolerance": {
+      "break_even_units": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m014",
+    "type": "lease_discount_sensitivity",
+    "description": "Recompute corpfin_029 but with discount rate = 0.10. Return npv_buy, npv_lease, preferred.",
+    "inputs": {
+      "base_task": "corpfin_029",
+      "override": {
+        "discount": 0.1
+      }
+    },
+    "answer_keys": [
+      "npv_buy",
+      "npv_lease",
+      "preferred"
+    ],
+    "expected": {
+      "npv_buy": -205378.96059925784,
+      "npv_lease": -269223.5606184191,
+      "preferred": "buy"
+    },
+    "tolerance": {
+      "npv_buy": 0.01,
+      "npv_lease": 0.01,
+      "preferred": 0
+    }
+  },
+  {
+    "task_id": "corpfin_m015",
+    "type": "npv_at_irr",
+    "description": "Take the IRR for corpfin_004 and compute the NPV of its cashflows at that IRR (should be ~0).",
+    "inputs": {
+      "task_ref": "corpfin_004"
+    },
+    "answer_keys": [
+      "npv_at_irr"
+    ],
+    "expected": {
+      "npv_at_irr": 1.2960299500264227e-11
+    },
+    "tolerance": {
+      "npv_at_irr": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m016",
+    "type": "ev_fcf_multiple",
+    "description": "Compute EV/FCF1 multiple for corpfin_020 (enterprise value divided by year-1 FCF). Use the values from that task.",
+    "inputs": {
+      "task_ref": "corpfin_020"
+    },
+    "answer_keys": [
+      "ev_fcf1_multiple"
+    ],
+    "expected": {
+      "ev_fcf1_multiple": 15.773979231707333
+    },
+    "tolerance": {
+      "ev_fcf1_multiple": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m017",
+    "type": "terminal_value_year5",
+    "description": "For corpfin_019, compute the terminal value at year 5 (the undiscounted TV at t=5).",
+    "inputs": {
+      "task_ref": "corpfin_019"
+    },
+    "answer_keys": [
+      "terminal_value_t5"
+    ],
+    "expected": {
+      "terminal_value_t5": 2041.0669381346154
+    },
+    "tolerance": {
+      "terminal_value_t5": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m018",
+    "type": "pv_terminal_value",
+    "description": "For corpfin_019, compute the present value of the terminal value (PV of TV).",
+    "inputs": {
+      "task_ref": "corpfin_019"
+    },
+    "answer_keys": [
+      "pv_terminal_value"
+    ],
+    "expected": {
+      "pv_terminal_value": 1326.5534646295496
+    },
+    "tolerance": {
+      "pv_terminal_value": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m019",
+    "type": "tv_share_of_ev",
+    "description": "For corpfin_019, compute the fraction of enterprise value that comes from PV of the terminal value: PV_TV / EV.",
+    "inputs": {
+      "task_ref": "corpfin_019"
+    },
+    "answer_keys": [
+      "tv_share"
+    ],
+    "expected": {
+      "tv_share": 0.7373385959816509
+    },
+    "tolerance": {
+      "tv_share": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m020",
+    "type": "npv_from_refs",
+    "description": "Compute NPV using cashflows from corpfin_003 and discount rate equal to the CAPM cost of equity (ke) from corpfin_009.",
+    "inputs": {
+      "cashflows_from": "corpfin_003",
+      "discount_from": "corpfin_009",
+      "discount_field": "ke"
+    },
+    "answer_keys": [
+      "npv"
+    ],
+    "expected": {
+      "npv": 1190.3379848763097
+    },
+    "tolerance": {
+      "npv": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m021",
+    "type": "profitability_index",
+    "description": "Compute the profitability index (PI) for corpfin_005 at its discount rate: PV of future inflows divided by |CF0|.",
+    "inputs": {
+      "task_ref": "corpfin_005"
+    },
+    "answer_keys": [
+      "pi"
+    ],
+    "expected": {
+      "pi": 0.6720653503748436
+    },
+    "tolerance": {
+      "pi": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m022",
+    "type": "eaa",
+    "description": "Compute the equivalent annual annuity (EAA) for corpfin_008 over its life using its discount rate. EAA = NPV * r / (1 - (1+r)^-n).",
+    "inputs": {
+      "task_ref": "corpfin_008"
+    },
+    "answer_keys": [
+      "eaa"
+    ],
+    "expected": {
+      "eaa": -169.19272771767393
+    },
+    "tolerance": {
+      "eaa": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m023",
+    "type": "contribution_margin_ratio",
+    "description": "Compute the contribution margin ratio for corpfin_023: (price - variable_cost) / price.",
+    "inputs": {
+      "task_ref": "corpfin_023"
+    },
+    "answer_keys": [
+      "cmr"
+    ],
+    "expected": {
+      "cmr": 0.2222222222222222
+    },
+    "tolerance": {
+      "cmr": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_m024",
+    "type": "npv_advantage",
+    "description": "For corpfin_028, compute the NPV advantage of leasing over buying: npv_lease - npv_buy (positive means lease is better).",
+    "inputs": {
+      "task_ref": "corpfin_028"
+    },
+    "answer_keys": [
+      "npv_advantage"
+    ],
+    "expected": {
+      "npv_advantage": 174171.49290534813
+    },
+    "tolerance": {
+      "npv_advantage": 0.01
+    }
+  },
+  {
+    "task_id": "corpfin_m025",
+    "type": "beta_pct_change",
+    "description": "For corpfin_018, compute the percent change in beta when moving from old to new D/E: (beta_l_new - beta_l) / beta_l.",
+    "inputs": {
+      "task_ref": "corpfin_018"
+    },
+    "answer_keys": [
+      "beta_pct_change"
+    ],
+    "expected": {
+      "beta_pct_change": -0.2904411764705884
+    },
+    "tolerance": {
+      "beta_pct_change": 1e-06
+    }
+  }
+]

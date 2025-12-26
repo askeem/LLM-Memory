@@ -1,0 +1,833 @@
+[
+  {
+    "task_id": "corpfin_001",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.12,
+      "cashflows": [
+        -1500,
+        300,
+        300,
+        700,
+        300,
+        500
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": -20.369669,
+      "irr": 0.114895
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_002",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.08,
+      "cashflows": [
+        -1500,
+        300,
+        600,
+        600,
+        300
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": -11.01063,
+      "irr": 0.076732
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_003",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.1,
+      "cashflows": [
+        -1000,
+        600,
+        300,
+        700,
+        300,
+        400,
+        700
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": 1167.713107,
+      "irr": 0.445059
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_004",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.08,
+      "cashflows": [
+        -2500,
+        400,
+        300,
+        700,
+        400
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": -1022.733474,
+      "irr": -0.115394
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_005",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.12,
+      "cashflows": [
+        -2500,
+        700,
+        300,
+        700,
+        500
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": -819.836624,
+      "irr": -0.050065
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_006",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.1,
+      "cashflows": [
+        -1000,
+        700,
+        400,
+        500,
+        300,
+        700,
+        300
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": 1151.490691,
+      "irr": 0.479652
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_007",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.08,
+      "cashflows": [
+        -1500,
+        700,
+        600,
+        500,
+        600,
+        700
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": 976.89371,
+      "irr": 0.306967
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_008",
+    "type": "npv_irr",
+    "description": "Compute NPV and IRR for a project.",
+    "inputs": {
+      "discount_rate": 0.15,
+      "cashflows": [
+        -2000,
+        400,
+        400,
+        400,
+        300,
+        700
+      ]
+    },
+    "answer_keys": [
+      "npv",
+      "irr"
+    ],
+    "expected": {
+      "npv": -567.160265,
+      "irr": 0.030296
+    },
+    "tolerance": {
+      "npv": 0.01,
+      "irr": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_009",
+    "type": "wacc",
+    "description": "Compute cost of equity (CAPM) and WACC.",
+    "inputs": {
+      "rf": 0.025,
+      "beta": 1.3,
+      "market_premium": 0.055,
+      "kd": 0.05,
+      "tax": 0.27,
+      "w_d": 0.3,
+      "w_e": 0.7
+    },
+    "answer_keys": [
+      "ke",
+      "wacc"
+    ],
+    "expected": {
+      "ke": 0.0965,
+      "wacc": 0.0785
+    },
+    "tolerance": {
+      "ke": 1e-05,
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_010",
+    "type": "wacc",
+    "description": "Compute cost of equity (CAPM) and WACC.",
+    "inputs": {
+      "rf": 0.025,
+      "beta": 1.3,
+      "market_premium": 0.05,
+      "kd": 0.04,
+      "tax": 0.27,
+      "w_d": 0.3,
+      "w_e": 0.7
+    },
+    "answer_keys": [
+      "ke",
+      "wacc"
+    ],
+    "expected": {
+      "ke": 0.09,
+      "wacc": 0.07176
+    },
+    "tolerance": {
+      "ke": 1e-05,
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_011",
+    "type": "wacc",
+    "description": "Compute cost of equity (CAPM) and WACC.",
+    "inputs": {
+      "rf": 0.02,
+      "beta": 1.1,
+      "market_premium": 0.05,
+      "kd": 0.055,
+      "tax": 0.25,
+      "w_d": 0.2,
+      "w_e": 0.8
+    },
+    "answer_keys": [
+      "ke",
+      "wacc"
+    ],
+    "expected": {
+      "ke": 0.075,
+      "wacc": 0.06825
+    },
+    "tolerance": {
+      "ke": 1e-05,
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_012",
+    "type": "wacc",
+    "description": "Compute cost of equity (CAPM) and WACC.",
+    "inputs": {
+      "rf": 0.03,
+      "beta": 0.9,
+      "market_premium": 0.06,
+      "kd": 0.05,
+      "tax": 0.25,
+      "w_d": 0.4,
+      "w_e": 0.6
+    },
+    "answer_keys": [
+      "ke",
+      "wacc"
+    ],
+    "expected": {
+      "ke": 0.084,
+      "wacc": 0.0654
+    },
+    "tolerance": {
+      "ke": 1e-05,
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_013",
+    "type": "wacc",
+    "description": "Compute cost of equity (CAPM) and WACC.",
+    "inputs": {
+      "rf": 0.025,
+      "beta": 1.3,
+      "market_premium": 0.055,
+      "kd": 0.055,
+      "tax": 0.21,
+      "w_d": 0.2,
+      "w_e": 0.8
+    },
+    "answer_keys": [
+      "ke",
+      "wacc"
+    ],
+    "expected": {
+      "ke": 0.0965,
+      "wacc": 0.08589
+    },
+    "tolerance": {
+      "ke": 1e-05,
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_014",
+    "type": "wacc",
+    "description": "Compute cost of equity (CAPM) and WACC.",
+    "inputs": {
+      "rf": 0.025,
+      "beta": 1.2,
+      "market_premium": 0.06,
+      "kd": 0.04,
+      "tax": 0.21,
+      "w_d": 0.4,
+      "w_e": 0.6
+    },
+    "answer_keys": [
+      "ke",
+      "wacc"
+    ],
+    "expected": {
+      "ke": 0.097,
+      "wacc": 0.07084
+    },
+    "tolerance": {
+      "ke": 1e-05,
+      "wacc": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_015",
+    "type": "beta_recap",
+    "description": "Unlever beta using current capital structure, then relever at a new D/E.",
+    "inputs": {
+      "beta_l": 1.1,
+      "tax": 0.25,
+      "d_to_e_old": 0.8,
+      "d_to_e_new": 1.0
+    },
+    "answer_keys": [
+      "beta_u",
+      "beta_l_new"
+    ],
+    "expected": {
+      "beta_u": 0.6875,
+      "beta_l_new": 1.203125
+    },
+    "tolerance": {
+      "beta_u": 1e-05,
+      "beta_l_new": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_016",
+    "type": "beta_recap",
+    "description": "Unlever beta using current capital structure, then relever at a new D/E.",
+    "inputs": {
+      "beta_l": 1.2,
+      "tax": 0.25,
+      "d_to_e_old": 0.3,
+      "d_to_e_new": 0.6
+    },
+    "answer_keys": [
+      "beta_u",
+      "beta_l_new"
+    ],
+    "expected": {
+      "beta_u": 0.979592,
+      "beta_l_new": 1.420408
+    },
+    "tolerance": {
+      "beta_u": 1e-05,
+      "beta_l_new": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_017",
+    "type": "beta_recap",
+    "description": "Unlever beta using current capital structure, then relever at a new D/E.",
+    "inputs": {
+      "beta_l": 1.1,
+      "tax": 0.21,
+      "d_to_e_old": 0.3,
+      "d_to_e_new": 0.6
+    },
+    "answer_keys": [
+      "beta_u",
+      "beta_l_new"
+    ],
+    "expected": {
+      "beta_u": 0.889248,
+      "beta_l_new": 1.310752
+    },
+    "tolerance": {
+      "beta_u": 1e-05,
+      "beta_l_new": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_018",
+    "type": "beta_recap",
+    "description": "Unlever beta using current capital structure, then relever at a new D/E.",
+    "inputs": {
+      "beta_l": 0.9,
+      "tax": 0.21,
+      "d_to_e_old": 0.8,
+      "d_to_e_new": 0.2
+    },
+    "answer_keys": [
+      "beta_u",
+      "beta_l_new"
+    ],
+    "expected": {
+      "beta_u": 0.551471,
+      "beta_l_new": 0.638603
+    },
+    "tolerance": {
+      "beta_u": 1e-05,
+      "beta_l_new": 1e-05
+    }
+  },
+  {
+    "task_id": "corpfin_019",
+    "type": "dcf",
+    "description": "Compute unlevered FCF (year 1), enterprise value via 5y DCF + terminal value, and implied equity value per share.",
+    "inputs": {
+      "ebit": 180,
+      "tax": 0.25,
+      "da": 30,
+      "capex": 60,
+      "delta_nwc": -10,
+      "fcf_growth": 0.03,
+      "wacc": 0.09,
+      "g_terminal": 0.025,
+      "cash": 120,
+      "debt": 150,
+      "shares": 10
+    },
+    "answer_keys": [
+      "fcf1",
+      "enterprise_value",
+      "equity_value",
+      "price_per_share"
+    ],
+    "expected": {
+      "fcf1": 115.0,
+      "enterprise_value": 1799.110303,
+      "equity_value": 1769.110303,
+      "price_per_share": 176.91103
+    },
+    "tolerance": {
+      "fcf1": 1e-05,
+      "enterprise_value": 0.01,
+      "equity_value": 0.01,
+      "price_per_share": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_020",
+    "type": "dcf",
+    "description": "Compute unlevered FCF (year 1), enterprise value via 5y DCF + terminal value, and implied equity value per share.",
+    "inputs": {
+      "ebit": 320,
+      "tax": 0.25,
+      "da": 40,
+      "capex": 60,
+      "delta_nwc": 8,
+      "fcf_growth": 0.05,
+      "wacc": 0.09,
+      "g_terminal": 0.02,
+      "cash": 50,
+      "debt": 100,
+      "shares": 10
+    },
+    "answer_keys": [
+      "fcf1",
+      "enterprise_value",
+      "equity_value",
+      "price_per_share"
+    ],
+    "expected": {
+      "fcf1": 212.0,
+      "enterprise_value": 3344.083597,
+      "equity_value": 3294.083597,
+      "price_per_share": 329.40836
+    },
+    "tolerance": {
+      "fcf1": 1e-05,
+      "enterprise_value": 0.01,
+      "equity_value": 0.01,
+      "price_per_share": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_021",
+    "type": "dcf",
+    "description": "Compute unlevered FCF (year 1), enterprise value via 5y DCF + terminal value, and implied equity value per share.",
+    "inputs": {
+      "ebit": 180,
+      "tax": 0.21,
+      "da": 40,
+      "capex": 35,
+      "delta_nwc": -10,
+      "fcf_growth": 0.04,
+      "wacc": 0.1,
+      "g_terminal": 0.02,
+      "cash": 80,
+      "debt": 150,
+      "shares": 10
+    },
+    "answer_keys": [
+      "fcf1",
+      "enterprise_value",
+      "equity_value",
+      "price_per_share"
+    ],
+    "expected": {
+      "fcf1": 157.2,
+      "enterprise_value": 2096.635915,
+      "equity_value": 2026.635915,
+      "price_per_share": 202.663592
+    },
+    "tolerance": {
+      "fcf1": 1e-05,
+      "enterprise_value": 0.01,
+      "equity_value": 0.01,
+      "price_per_share": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_022",
+    "type": "dcf",
+    "description": "Compute unlevered FCF (year 1), enterprise value via 5y DCF + terminal value, and implied equity value per share.",
+    "inputs": {
+      "ebit": 180,
+      "tax": 0.25,
+      "da": 40,
+      "capex": 45,
+      "delta_nwc": 8,
+      "fcf_growth": 0.03,
+      "wacc": 0.1,
+      "g_terminal": 0.03,
+      "cash": 120,
+      "debt": 220,
+      "shares": 15
+    },
+    "answer_keys": [
+      "fcf1",
+      "enterprise_value",
+      "equity_value",
+      "price_per_share"
+    ],
+    "expected": {
+      "fcf1": 122.0,
+      "enterprise_value": 1742.857143,
+      "equity_value": 1642.857143,
+      "price_per_share": 109.52381
+    },
+    "tolerance": {
+      "fcf1": 1e-05,
+      "enterprise_value": 0.01,
+      "equity_value": 0.01,
+      "price_per_share": 0.0001
+    }
+  },
+  {
+    "task_id": "corpfin_023",
+    "type": "break_even",
+    "description": "Compute break-even quantity (units) given price, variable cost, and fixed cost.",
+    "inputs": {
+      "price": 45,
+      "variable_cost": 35,
+      "fixed_cost": 250000
+    },
+    "answer_keys": [
+      "break_even_units"
+    ],
+    "expected": {
+      "break_even_units": 25000.0
+    },
+    "tolerance": {
+      "break_even_units": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_024",
+    "type": "break_even",
+    "description": "Compute break-even quantity (units) given price, variable cost, and fixed cost.",
+    "inputs": {
+      "price": 75,
+      "variable_cost": 35,
+      "fixed_cost": 180000
+    },
+    "answer_keys": [
+      "break_even_units"
+    ],
+    "expected": {
+      "break_even_units": 4500.0
+    },
+    "tolerance": {
+      "break_even_units": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_025",
+    "type": "break_even",
+    "description": "Compute break-even quantity (units) given price, variable cost, and fixed cost.",
+    "inputs": {
+      "price": 75,
+      "variable_cost": 20,
+      "fixed_cost": 180000
+    },
+    "answer_keys": [
+      "break_even_units"
+    ],
+    "expected": {
+      "break_even_units": 3272.727273
+    },
+    "tolerance": {
+      "break_even_units": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_026",
+    "type": "break_even",
+    "description": "Compute break-even quantity (units) given price, variable cost, and fixed cost.",
+    "inputs": {
+      "price": 75,
+      "variable_cost": 20,
+      "fixed_cost": 120000
+    },
+    "answer_keys": [
+      "break_even_units"
+    ],
+    "expected": {
+      "break_even_units": 2181.818182
+    },
+    "tolerance": {
+      "break_even_units": 1e-06
+    }
+  },
+  {
+    "task_id": "corpfin_027",
+    "type": "lease_vs_buy",
+    "description": "Compare lease vs buy on an after-tax NPV basis (simplified). Choose which is cheaper (higher NPV).",
+    "inputs": {
+      "buy_price": 250000,
+      "lease_payments": [
+        60000,
+        60000,
+        60000,
+        60000,
+        60000
+      ],
+      "discount": 0.08,
+      "tax": 0.21,
+      "dep_years": 5,
+      "salvage": 30000
+    },
+    "answer_keys": [
+      "npv_buy",
+      "npv_lease",
+      "preferred"
+    ],
+    "expected": {
+      "npv_buy": -191946.72,
+      "npv_lease": -189254.46,
+      "preferred": "lease"
+    },
+    "tolerance": {
+      "npv_buy": 0.01,
+      "npv_lease": 0.01,
+      "preferred": 0
+    }
+  },
+  {
+    "task_id": "corpfin_028",
+    "type": "lease_vs_buy",
+    "description": "Compare lease vs buy on an after-tax NPV basis (simplified). Choose which is cheaper (higher NPV).",
+    "inputs": {
+      "buy_price": 450000,
+      "lease_payments": [
+        55000,
+        55000,
+        55000,
+        55000,
+        55000
+      ],
+      "discount": 0.08,
+      "tax": 0.21,
+      "dep_years": 5,
+      "salvage": 50000
+    },
+    "answer_keys": [
+      "npv_buy",
+      "npv_lease",
+      "preferred"
+    ],
+    "expected": {
+      "npv_buy": -347654.74,
+      "npv_lease": -173483.25,
+      "preferred": "lease"
+    },
+    "tolerance": {
+      "npv_buy": 0.01,
+      "npv_lease": 0.01,
+      "preferred": 0
+    }
+  },
+  {
+    "task_id": "corpfin_029",
+    "type": "lease_vs_buy",
+    "description": "Compare lease vs buy on an after-tax NPV basis (simplified). Choose which is cheaper (higher NPV).",
+    "inputs": {
+      "buy_price": 250000,
+      "lease_payments": [
+        70000,
+        70000,
+        70000,
+        70000,
+        70000,
+        70000,
+        70000
+      ],
+      "discount": 0.08,
+      "tax": 0.21,
+      "dep_years": 7,
+      "salvage": 20000
+    },
+    "answer_keys": [
+      "npv_buy",
+      "npv_lease",
+      "preferred"
+    ],
+    "expected": {
+      "npv_buy": -201733.08,
+      "npv_lease": -287912.26,
+      "preferred": "buy"
+    },
+    "tolerance": {
+      "npv_buy": 0.01,
+      "npv_lease": 0.01,
+      "preferred": 0
+    }
+  },
+  {
+    "task_id": "corpfin_030",
+    "type": "lease_vs_buy",
+    "description": "Compare lease vs buy on an after-tax NPV basis (simplified). Choose which is cheaper (higher NPV).",
+    "inputs": {
+      "buy_price": 450000,
+      "lease_payments": [
+        55000,
+        55000,
+        55000,
+        55000,
+        55000,
+        55000,
+        55000
+      ],
+      "discount": 0.1,
+      "tax": 0.25,
+      "dep_years": 7,
+      "salvage": 50000
+    },
+    "answer_keys": [
+      "npv_buy",
+      "npv_lease",
+      "preferred"
+    ],
+    "expected": {
+      "npv_buy": -352514.13,
+      "npv_lease": -200822.28,
+      "preferred": "lease"
+    },
+    "tolerance": {
+      "npv_buy": 0.01,
+      "npv_lease": 0.01,
+      "preferred": 0
+    }
+  }
+]
