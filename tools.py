@@ -5,49 +5,66 @@ import math
 import ast
 import html
 from typing import Any, Dict
-
 import numpy as np
 
 
 _ALLOWED_NAMES = {
-    # math
-    "pi": math.pi,
-    "e": math.e,
-    "sqrt": math.sqrt,
-    "log": math.log,
-    "exp": math.exp,
-    "pow": pow,
-    "abs": abs,
-    "min": min,
-    "max": max,
-    "sum": sum,
-
-    # handy builtins for expressions (your schema example already used range)
-    "range": range,
-    "enumerate": enumerate,
-    "len": len,
-    "round": round,
-    "float": float,
-    "int": int,
-
-    # numpy basics
+    "pi": math.pi, "e": math.e,
+    "sqrt": math.sqrt, "log": math.log, "exp": math.exp,
+    "pow": pow, "abs": abs, "min": min, "max": max, "sum": sum,
+    "range": range, "enumerate": enumerate, "len": len, "round": round,
+    "float": float, "int": int,
     "np": np,
 }
 
 
-def safe_calc(expr: str) -> Any:
-    # 1) unescape HTML (so &#10; becomes real newlines)
-    expr = html.unescape(expr or "").strip()
+def _to_jsonable(x: Any) -> Any:
+    # primitives
+    if x is None or isinstance(x, (str, int, float, bool)):
+        return x
 
-    # 2) enforce "single expression" only (no def/for/assignments)
+    # complex numbers (common from np.roots)
+    if isinstance(x, complex):
+        # if it's effectively real, drop the imaginary part
+        if abs(x.imag) < 1e-12:
+            return float(x.real)
+        # otherwise encode as an object (or return repr(x) if you prefer)
+        return {"re": float(x.real), "im": float(x.imag)}
+
+    # numpy scalars (may become complex after .item())
+    if isinstance(x, np.generic):
+        return _to_jsonable(x.item())
+
+    # numpy arrays (tolist may contain complex -> recurse)
+    if isinstance(x, np.ndarray):
+        return _to_jsonable(x.tolist())
+
+    # range
+    if isinstance(x, range):
+        return list(x)
+
+    # containers
+    if isinstance(x, (list, tuple, set)):
+        return [_to_jsonable(v) for v in x]
+
+    if isinstance(x, dict):
+        return {str(k): _to_jsonable(v) for k, v in x.items()}
+
+    # try numeric cast
+    try:
+        return float(x)
+    except Exception:
+        return repr(x)
+
+
+def safe_calc(expr: str) -> Any:
+    expr = html.unescape(expr or "").strip()
     try:
         tree = ast.parse(expr, mode="eval")
     except SyntaxError as e:
         raise ValueError(
-            "calc expects a SINGLE Python expression (no def/for/assignments). "
-            "Use list comprehensions / numpy expressions."
+            "calc expects a SINGLE Python expression (no def/for/assignments)."
         ) from e
-
     code = compile(tree, "<calc>", "eval")
     return eval(code, {"__builtins__": {}}, dict(_ALLOWED_NAMES))
 
@@ -59,13 +76,11 @@ def tool_schema() -> Dict[str, Any]:
             "name": "calc",
             "description": (
                 "Calculator: evaluate a SINGLE Python expression (math/numpy). "
-                "No statements/defs/loops. Example: 'sum(300/(1.12)**t for t in range(1,6))'."
+                "Must return a JSON-serializable result (number or list)."
             ),
             "parameters": {
                 "type": "object",
-                "properties": {
-                    "expr": {"type": "string", "description": "Single Python expression."}
-                },
+                "properties": {"expr": {"type": "string"}},
                 "required": ["expr"],
             },
         },
@@ -79,15 +94,6 @@ def run_tool(name: str, args: Dict[str, Any]) -> Dict[str, Any]:
     expr = args.get("expr", "")
     try:
         value = safe_calc(expr)
-
-        # Make numpy scalars JSON-able
-        if hasattr(value, "item"):
-            try:
-                value = value.item()
-            except Exception:
-                pass
-
-        return {"value": value}
+        return {"value": _to_jsonable(value)}
     except Exception as e:
-        # IMPORTANT: never crash the whole run because the model sent bad tool code
         return {"error": f"{type(e).__name__}: {e}"}
