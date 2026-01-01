@@ -1,0 +1,112 @@
+[
+  {
+    "task_id": "learn_101",
+    "type": "policy_learning",
+    "description": "Define the 'Normalized Orion EBITDA'. Policy: Start from Reported EBITDA. Remove one-off restructuring costs. HOWEVER: Legal settlements are NOT adjusted out. Stock-based compensation is always added back.",
+    "inputs": {
+      "reported_ebitda": 180,
+      "restructuring": 30,
+      "legal": 20,
+      "sbc": 15
+    },
+    "answer_keys": ["normalized_ebitda"],
+    "expected": {
+      "normalized_ebitda": 165.0
+    },
+    "tolerance": {
+      "normalized_ebitda": 0.1
+    }
+  },
+
+  {
+    "task_id": "learn_102",
+    "type": "policy_learning",
+    "description": "Compute the 'Normalized Orion EBITDA' for a new business unit using the approved normalization policy.",
+    "inputs": {
+      "reported_ebitda": 120,
+      "restructuring": 10,
+      "legal": 5,
+      "sbc": 8
+    },
+    "answer_keys": ["normalized_ebitda"],
+    "expected": {
+      "normalized_ebitda": 118.0
+    },
+    "tolerance": {
+      "normalized_ebitda": 0.1
+    }
+  },
+
+  {
+    "task_id": "learn_103",
+    "type": "banned_method",
+    "description": "Calculate the 'Project Discount Rate'. IMPORTANT: WACC is NOT permitted for internal projects. Use the Internal Hurdle Rate Method: BaseRate + ExecutionPremium (3%) + CountryPremium (if applicable).",
+    "inputs": {
+      "base_rate": 0.06,
+      "country": "Germany"
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": {
+      "discount_rate": 0.09
+    },
+    "tolerance": {
+      "discount_rate": 0.001
+    }
+  },
+
+  {
+    "task_id": "learn_104",
+    "type": "banned_method",
+    "description": "Calculate the Project Discount Rate for an emerging-market expansion. Recall the approved methodology.",
+    "inputs": {
+      "base_rate": 0.06,
+      "country": "Brazil",
+      "country_premium": 0.025
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": {
+      "discount_rate": 0.115
+    },
+    "tolerance": {
+      "discount_rate": 0.001
+    }
+  },
+
+  {
+    "task_id": "learn_105",
+    "type": "complex_procedure",
+    "description": "Compute 'Free Cash Flow to Firm (Adjusted)'. Procedure: 1) Start from Normalized EBITDA. 2) Subtract Cash Taxes (NOPAT-style). 3) Subtract Maintenance CapEx ONLY (Growth CapEx excluded by policy). 4) Ignore working capital entirely.",
+    "inputs": {
+      "normalized_ebitda": 200,
+      "tax": 0.25,
+      "maintenance_capex": 30,
+      "growth_capex": 50
+    },
+    "answer_keys": ["fcff_adjusted"],
+    "expected": {
+      "fcff_adjusted": 120.0
+    },
+    "tolerance": {
+      "fcff_adjusted": 0.1
+    }
+  },
+
+  {
+    "task_id": "learn_106",
+    "type": "complex_procedure",
+    "description": "Compute 'Free Cash Flow to Firm (Adjusted)' for a follow-up valuation using the established methodology.",
+    "inputs": {
+      "normalized_ebitda": 140,
+      "tax": 0.20,
+      "maintenance_capex": 20,
+      "growth_capex": 40
+    },
+    "answer_keys": ["fcff_adjusted"],
+    "expected": {
+      "fcff_adjusted": 92.0
+    },
+    "tolerance": {
+      "fcff_adjusted": 0.1
+    }
+  }
+]

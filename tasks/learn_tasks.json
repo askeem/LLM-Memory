@@ -1,0 +1,102 @@
+[
+  {
+    "task_id": "learn_001",
+    "type": "policy_learning",
+    "description": "Calculate the 'Adjusted Orion Cashflow' for Year 1. Policy: If EBITDA > 100, the Adjusted Cashflow is (EBITDA * 0.8) - 20. If EBITDA <= 100, it is (EBITDA * 0.9).",
+    "inputs": {
+      "EBITDA": 150
+    },
+    "answer_keys": ["adjusted_cf"],
+    "expected": {
+      "adjusted_cf": 100.0
+    },
+    "tolerance": {
+      "adjusted_cf": 0.1
+    }
+  },
+  {
+    "task_id": "learn_002",
+    "type": "policy_learning",
+    "description": "Calculate the 'Adjusted Orion Cashflow' for Year 1 using the standard corporate policy.",
+    "inputs": {
+      "EBITDA": 80
+    },
+    "answer_keys": ["adjusted_cf"],
+    "expected": {
+      "adjusted_cf": 72.0
+    },
+    "tolerance": {
+      "adjusted_cf": 0.1
+    }
+  },
+  {
+    "task_id": "learn_003",
+    "type": "banned_method",
+    "description": "Calculate the 'Safe-Hedge WACC'. Note: The standard CAPM formula is BANNED for this asset class. You must use the 'Build-Up Method': RiskFree + EquityRiskPremium + SizePremium (2.0%) + SpecificRisk (1.5%).",
+    "inputs": {
+      "rf": 0.03,
+      "erp": 0.05,
+      "beta": 1.2 
+    },
+    "answer_keys": ["safe_wacc"],
+    "expected": {
+      "safe_wacc": 0.115
+    },
+    "tolerance": {
+      "safe_wacc": 0.001
+    }
+  },
+  {
+    "task_id": "learn_004",
+    "type": "banned_method",
+    "description": "Calculate the 'Safe-Hedge WACC' for a new project. Recall the approved methodology for this asset class.",
+    "inputs": {
+      "rf": 0.04,
+      "erp": 0.06,
+      "beta": 1.5
+    },
+    "answer_keys": ["safe_wacc"],
+    "expected": {
+      "safe_wacc": 0.135
+    },
+    "tolerance": {
+      "safe_wacc": 0.001
+    }
+  },
+  {
+    "task_id": "learn_005",
+    "type": "complex_procedure",
+    "description": "Compute the 'Triple-Net Valuation'. Procedure: 1. Calculate NOPAT (EBIT * (1-t)). 2. Add Depreciation. 3. Subtract CapEx * 1.5 (Policy adjustment).",
+    "inputs": {
+      "ebit": 200,
+      "tax": 0.25,
+      "dep": 50,
+      "capex": 40
+    },
+    "answer_keys": ["valuation"],
+    "expected": {
+      "valuation": 140.0
+    },
+    "tolerance": {
+      "valuation": 0.1
+    }
+  },
+  {
+    "task_id": "learn_006",
+    "type": "complex_procedure",
+    "description": "Compute the 'Triple-Net Valuation' for a different unit using the established procedure.",
+    "inputs": {
+      "ebit": 100,
+      "tax": 0.20,
+      "dep": 20,
+      "capex": 20
+    },
+    "answer_keys": ["valuation"],
+    "expected": {
+      "valuation": 70.0
+    },
+    "tolerance": {
+      "valuation": 0.1
+    }
+  }
+]

@@ -153,6 +153,19 @@ def verify(task: Dict[str, Any], model_answer: Dict[str, Any], task_index: Dict[
                     got[k] = str(model_answer.get(k)).strip().lower()
                 else:
                     got[k] = num(model_answer.get(k))
+
+        elif ttype == "policy_learning":
+            for k in task["answer_keys"]:
+                got[k] = num(model_answer.get(k))
+
+        elif ttype == "banned_method":
+            for k in task["answer_keys"]:
+                got[k] = num(model_answer.get(k))
+
+        elif ttype == "complex_procedure":
+            for k in task["answer_keys"]:
+                got[k] = num(model_answer.get(k))
+
         else:
             return False, {"error": f"Unknown task type: {ttype}"}
     except Exception as e:

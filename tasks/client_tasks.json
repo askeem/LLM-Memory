@@ -1,0 +1,242 @@
+[
+  {
+    "task_id": "default_001",
+    "type": "policy_learning",
+    "description": "Consulting firm default methodology (applies when a company has NO special playbook). Default FCFF: FCFF = EBIT*(1-tax) + D&A - Capex - ΔNWC.",
+    "inputs": {
+      "company": "DEFAULT_TEMPLATE",
+      "ebit": 100,
+      "tax": 0.25,
+      "da": 10,
+      "capex": 20,
+      "dnwc": 5
+    },
+    "answer_keys": ["fcff"],
+    "expected": { "fcff": 60.0 },
+    "tolerance": { "fcff": 0.1 }
+  },
+
+  {
+    "task_id": "client_101",
+    "type": "policy_learning",
+    "description": "Client playbook seed for Helios Motors. Define 'Helios Adjusted FCF': 1) NOPAT = EBIT*(1-tax). 2) Add D&A. 3) Subtract Maintenance Capex ONLY. 4) Apply Working Capital Haircut: subtract (ΔNWC * 0.5).",
+    "inputs": {
+      "company": "Helios Motors",
+      "ebit": 200,
+      "tax": 0.25,
+      "da": 40,
+      "maint_capex": 30,
+      "dnwc": 20
+    },
+    "answer_keys": ["adj_fcf"],
+    "expected": { "adj_fcf": 150.0 },
+    "tolerance": { "adj_fcf": 0.1 }
+  },
+
+  {
+    "task_id": "default_002",
+    "type": "complex_procedure",
+    "description": "Compute FCFF for Atlas Retail using the consulting firm's DEFAULT methodology (no special playbook exists).",
+    "inputs": {
+      "company": "Atlas Retail",
+      "ebit": 80,
+      "tax": 0.30,
+      "da": 8,
+      "capex": 15,
+      "dnwc": -4
+    },
+    "answer_keys": ["fcff"],
+    "expected": { "fcff": 53.0 },
+    "tolerance": { "fcff": 0.1 }
+  },
+
+  {
+    "task_id": "client_102",
+    "type": "policy_learning",
+    "description": "Client playbook seed for Northbridge SaaS. Define 'Northbridge Adjusted FCF': 1) Start from EBITDA. 2) Subtract Cash Taxes = (EBITDA - D&A)*(tax). 3) Subtract Total Capex (maintenance+growth). 4) Subtract full ΔNWC. 5) SBC is NEVER added back.",
+    "inputs": {
+      "company": "Northbridge SaaS",
+      "ebitda": 180,
+      "da": 30,
+      "tax": 0.20,
+      "capex_total": 50,
+      "dnwc": 10,
+      "sbc": 25
+    },
+    "answer_keys": ["adj_fcf"],
+    "expected": { "adj_fcf": 90.0 },
+    "tolerance": { "adj_fcf": 0.1 }
+  },
+
+  {
+    "task_id": "client_103",
+    "type": "policy_learning",
+    "description": "Client playbook seed for Redwood Infrastructure. Define 'Redwood Adjusted FCF': 1) Start from Reported FFO. 2) Add back one-off legal settlements. 3) Subtract Sustaining Capex * 1.2 (regulator conservatism). 4) Ignore taxes.",
+    "inputs": {
+      "company": "Redwood Infrastructure",
+      "ffo": 120,
+      "legal_oneoff": 15,
+      "sust_capex": 20
+    },
+    "answer_keys": ["adj_fcf"],
+    "expected": { "adj_fcf": 111.0 },
+    "tolerance": { "adj_fcf": 0.1 }
+  },
+
+  {
+    "task_id": "client_104",
+    "type": "complex_procedure",
+    "description": "Compute the client's Adjusted FCF using the standard client methodology.",
+    "inputs": {
+      "company": "Helios Motors",
+      "ebit": 90,
+      "tax": 0.25,
+      "da": 18,
+      "maint_capex": 15,
+      "dnwc": 10
+    },
+    "answer_keys": ["adj_fcf"],
+    "expected": { "adj_fcf": 65.5 },
+    "tolerance": { "adj_fcf": 0.1 }
+  },
+
+  {
+    "task_id": "default_003",
+    "type": "complex_procedure",
+    "description": "Compute FCFF for PineCloud Logistics using the consulting firm's DEFAULT methodology (no special playbook exists).",
+    "inputs": {
+      "company": "PineCloud Logistics",
+      "ebit": 160,
+      "tax": 0.22,
+      "da": 25,
+      "capex": 40,
+      "dnwc": 20
+    },
+    "answer_keys": ["fcff"],
+    "expected": { "fcff": 89.8 },
+    "tolerance": { "fcff": 0.1 }
+  },
+
+  {
+    "task_id": "client_105",
+    "type": "complex_procedure",
+    "description": "Compute the client's Adjusted FCF using the standard client methodology.",
+    "inputs": {
+      "company": "Northbridge SaaS",
+      "ebitda": 140,
+      "da": 20,
+      "tax": 0.20,
+      "capex_total": 30,
+      "dnwc": 15,
+      "sbc": 10
+    },
+    "answer_keys": ["adj_fcf"],
+    "expected": { "adj_fcf": 71.0 },
+    "tolerance": { "adj_fcf": 0.1 }
+  },
+
+  {
+    "task_id": "client_106",
+    "type": "complex_procedure",
+    "description": "Compute the client's Adjusted FCF using the standard client methodology.",
+    "inputs": {
+      "company": "Redwood Infrastructure",
+      "ffo": 110,
+      "legal_oneoff": 5,
+      "sust_capex": 30
+    },
+    "answer_keys": ["adj_fcf"],
+    "expected": { "adj_fcf": 79.0 },
+    "tolerance": { "adj_fcf": 0.1 }
+  },
+
+  {
+    "task_id": "default_004",
+    "type": "policy_learning",
+    "description": "Consulting firm default discount rate (applies when a company has NO special playbook): DiscountRate = rf + beta*erp.",
+    "inputs": {
+      "company": "DEFAULT_TEMPLATE",
+      "rf": 0.02,
+      "beta": 1.10,
+      "erp": 0.05
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": { "discount_rate": 0.075 },
+    "tolerance": { "discount_rate": 0.001 }
+  },
+
+  {
+    "task_id": "client_107",
+    "type": "banned_method",
+    "description": "Helios Motors discount rate policy seed. CAPM is BANNED. Use Build-Up: rf + erp + size_premium (1.5%) + specific_risk (2.0%).",
+    "inputs": {
+      "company": "Helios Motors",
+      "rf": 0.03,
+      "erp": 0.05,
+      "beta": 1.2
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": { "discount_rate": 0.115 },
+    "tolerance": { "discount_rate": 0.001 }
+  },
+
+  {
+    "task_id": "default_005",
+    "type": "complex_procedure",
+    "description": "Compute the discount rate for Nova Packaging using the consulting firm's DEFAULT discount-rate methodology (no special playbook exists).",
+    "inputs": {
+      "company": "Nova Packaging",
+      "rf": 0.03,
+      "beta": 0.9,
+      "erp": 0.055
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": { "discount_rate": 0.0795 },
+    "tolerance": { "discount_rate": 0.001 }
+  },
+
+  {
+    "task_id": "client_108",
+    "type": "policy_learning",
+    "description": "Northbridge SaaS discount rate policy seed. Use CAPM plus a fixed SaaS premium of 1.0%: DiscountRate = rf + beta*erp + 0.01.",
+    "inputs": {
+      "company": "Northbridge SaaS",
+      "rf": 0.03,
+      "beta": 1.4,
+      "erp": 0.05
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": { "discount_rate": 0.11 },
+    "tolerance": { "discount_rate": 0.001 }
+  },
+
+  {
+    "task_id": "client_109",
+    "type": "complex_procedure",
+    "description": "Compute the discount rate using the standard client methodology.",
+    "inputs": {
+      "company": "Helios Motors",
+      "rf": 0.04,
+      "erp": 0.06,
+      "beta": 1.5
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": { "discount_rate": 0.135 },
+    "tolerance": { "discount_rate": 0.001 }
+  },
+
+  {
+    "task_id": "client_110",
+    "type": "complex_procedure",
+    "description": "Compute the discount rate using the standard client methodology.",
+    "inputs": {
+      "company": "Northbridge SaaS",
+      "rf": 0.04,
+      "beta": 1.6,
+      "erp": 0.055
+    },
+    "answer_keys": ["discount_rate"],
+    "expected": { "discount_rate": 0.138 },
+    "tolerance": { "discount_rate": 0.001 }
+  }
+]
