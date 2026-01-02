@@ -145,7 +145,7 @@ def main():
             q_company = f" company={company} " if company else ""
             query = f"{q_company}{task['description']} {json.dumps(task['inputs'], ensure_ascii=False)}"
             company = task.get("inputs", {}).get("company")
-            items = mem.retrieve(query, k=5, company=company, folder_hint=t_type)
+            items = mem.retrieve(query, k=5, company=company)
             if items:
                 mem_context = "\n[RELEVANT MEMORY]\n" + mem.format_memories(items)
                 print(f"  Retrieved {len(items)} memories" + (f" (company={company})" if company else ""))
